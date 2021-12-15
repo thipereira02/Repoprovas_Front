@@ -11,11 +11,14 @@ export default function Home() {
 
     return (
         <Options>
-            <Button onClick={() => goTo('/tests')}>
-                    Visualizar uma prova
+            <Button onClick={() => goTo('/bysubjects')}>
+                Ver provas por disciplinas
             </Button>
-            <Button onClick={() => goTo('/sendtest')}>
-                    Enviar uma prova
+            <Button onClick={() => goTo('/byteachers')}>
+                Ver provas por professores
+            </Button>
+            <Button onClick={() => goTo('/sendtests')}>
+                Enviar uma prova
             </Button>
         </Options>
     );
