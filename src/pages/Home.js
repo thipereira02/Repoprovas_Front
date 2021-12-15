@@ -1,42 +1,30 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
-import image from '../assets/REPOPROVAS.png';
-
 export default function Home() {
+    const navigate = useNavigate();
+
+    function goTo(path) {
+        navigate(path);
+    }
+
     return (
-        <Body>
-            <Image src={image} alt='logo'/>
-            <Options>
-                <Button>
+        <Options>
+            <Button onClick={() => goTo('/tests')}>
                     Visualizar uma prova
-                </Button>
-                <Button>
+            </Button>
+            <Button onClick={() => goTo('/sendtest')}>
                     Enviar uma prova
-                </Button>
-            </Options>
-        </Body>
+            </Button>
+        </Options>
     );
 }
 
-const Body = styled.div`
-    padding-top: 70px;
-    margin: 0 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-const Image = styled.img`
-    height: 300px;
-    width: 300px;
-`;
-
 const Options = styled.div`
-    margin-top: 50px;
+    margin: 50px 150px;
     display: flex;
     justify-content: space-around;
-    width: 70%;
 `;
 
 const Button = styled.button`
