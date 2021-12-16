@@ -1,19 +1,23 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getCategories } from '../services/server';
+import { getCategories, getSubjects } from '../services/server';
 
 export default function SendTest() {
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
     const [category, setCategory] = useState(null);
-    const [discipline, setDiscipline] = useState(null);
+    const [subject, setSubject] = useState(null);
     const [teacher, setTeacher] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [subjects, setSubjects] = useState([]);
 
     useEffect(() => {
-        const req = getCategories();
-        req.then(res => setCategories(res.data));
+        const categReq = getCategories();
+        categReq.then(res => setCategories(res.data));
+
+        const subjReq = getSubjects();
+        subjReq.then(res => setSubjects(res.data));
     }, []);
 
     return (
@@ -37,9 +41,16 @@ export default function SendTest() {
                     onInput={e => e.target.setCustomValidity('')}
                     required
                 />
-                <Select onChange={(e) => setCategory(e.target.value)} >
+                <Select onChange={(e) => setCategory(e.target.value)}>
+                    <option value="0" disabled selected>Categoria</option>
                     {categories.map(c => (
                         <option value={`${c.name}`} key={c.id}>{c.name}</option>
+                    ))}
+                </Select>
+                <Select onChange={(e) => setSubject(e.target.value)}>
+                    <option value="0" disabled selected>Disciplina</option>
+                    {subjects.map(s => (
+                        <option value={`${s.name}`} key={s.id}>{s.name}</option>
                     ))}
                 </Select>
                 <Button type="submit">
@@ -57,8 +68,7 @@ const Body = styled.div`
 
 const Input = styled.input`
   padding: 16px;
-  border: 1px solid ${props => props.invalid ? '#DC3545' : '#CCC'};
-  background-color: ${props => props.invalid ? '#DC3545' : '#FFF'};
+  border: 1px solid #CCC;
   border-radius: 5px;
   margin-bottom: 15px;
   width: 100%;
@@ -85,7 +95,6 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
 `;
 
 const Error = styled.div`
@@ -108,6 +117,7 @@ const Select = styled.select`
   padding-left: 13px;
   font-size: 20px;
   color: #807a7a;
+  margin-bottom: 15px;
 
   option {
     color: black;
