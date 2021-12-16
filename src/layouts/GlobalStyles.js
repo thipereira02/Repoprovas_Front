@@ -3,7 +3,7 @@
    License: none (public domain)
 */
 
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 	html, body, div, span, applet, object, iframe,

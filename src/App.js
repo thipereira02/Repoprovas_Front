@@ -4,6 +4,7 @@ import Main from './components/Main';
 
 import GlobalStyle from './layouts/GlobalStyles';
 import Home from './pages/Home';
+import SendTest from './pages/SendTest';
 
 export default function App() {
     return (
@@ -13,6 +14,7 @@ export default function App() {
                 <Main />
                 <Routes>
                     <Route path='/' element={<Home />} />
+                    <Route path='/sendtests' element={<SendTest />} />
                 </Routes>
             </BrowserRouter>
         </>
