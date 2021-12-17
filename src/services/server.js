@@ -13,3 +13,7 @@ export function getSubjects(){
 export function getTeacherBySubject(id){
     return axios.get(`${BASE_URL}/teachers/${id}`);
 }
+
+export function sendTest(body){
+    return axios.post(`${BASE_URL}/tests`, body);
+}

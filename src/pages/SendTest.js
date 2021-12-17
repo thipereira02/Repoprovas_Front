@@ -1,9 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { getCategories, getSubjects, getTeacherBySubject } from '../services/server';
+
+import { getCategories, getSubjects, getTeacherBySubject, sendTest } from '../services/server';
 
 export default function SendTest() {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [link, setLink] = useState('');
     const [category, setCategory] = useState(null);
@@ -28,9 +30,30 @@ export default function SendTest() {
         }
     }, [subject]);
 
+    function postTest(e){
+        e.preventDefault();
+
+        if (!category || !subject || !teacher) alert('Preencha todos os campos corretamente para concluir o envio da prova.');
+
+        const body = {
+            name,
+            pdfLink: link,
+            categoryId: category,
+            subjectId: subject,
+            teacherId: teacher
+        };
+
+        const req = sendTest(body);
+        req.then(() => {
+            alert('Prova enviada com sucesso!');
+            navigate('/');
+        });
+        req.catch(() => alert('Ocorreu um erro no processo de envio. Tente novamente mais tarde'));
+    }
+
     return (
         <Body>
-            <form>
+            <form onSubmit={postTest}>
                 <Input 
                     type="text" 
                     placeholder="Nome da prova (Ex.: 2020.1)" 
