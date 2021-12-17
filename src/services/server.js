@@ -9,3 +9,7 @@ export function getCategories(){
 export function getSubjects(){
     return axios.get(`${BASE_URL}/subjects`);
 }
+
+export function getTeacherBySubject(id){
+    return axios.get(`${BASE_URL}/teachers/${id}`);
+}

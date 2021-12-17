@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { getCategories, getSubjects } from '../services/server';
+import { getCategories, getSubjects, getTeacherBySubject } from '../services/server';
 
 export default function SendTest() {
     const [name, setName] = useState('');
@@ -11,6 +11,7 @@ export default function SendTest() {
     const [teacher, setTeacher] = useState(null);
     const [categories, setCategories] = useState([]);
     const [subjects, setSubjects] = useState([]);
+    const [teachers, setTeachers] = useState([]);
 
     useEffect(() => {
         const categReq = getCategories();
@@ -19,6 +20,13 @@ export default function SendTest() {
         const subjReq = getSubjects();
         subjReq.then(res => setSubjects(res.data));
     }, []);
+
+    useEffect(() => {
+        if (subject !== null){
+            const teacherReq = getTeacherBySubject(subject);
+            teacherReq.then(res => setTeachers(res.data));
+        }
+    }, [subject]);
 
     return (
         <Body>
@@ -44,17 +52,23 @@ export default function SendTest() {
                 <Select onChange={(e) => setCategory(e.target.value)}>
                     <option value="0" disabled selected>Categoria</option>
                     {categories.map(c => (
-                        <option value={`${c.name}`} key={c.id}>{c.name}</option>
+                        <option value={c.id} key={c.id}>{c.name}</option>
                     ))}
                 </Select>
                 <Select onChange={(e) => setSubject(e.target.value)}>
                     <option value="0" disabled selected>Disciplina</option>
                     {subjects.map(s => (
-                        <option value={`${s.name}`} key={s.id}>{s.name}</option>
+                        <option value={s.id} key={s.id}>{s.name}</option>
+                    ))}
+                </Select>
+                <Select onChange={(e) => setTeacher(e.target.value)} >
+                    <option value="0" disabled selected>Professor</option>
+                    {teachers.map(t => (
+                        <option value={t.id} key={t.id}>{t.name}</option>
                     ))}
                 </Select>
                 <Button type="submit">
-                    Entrar
+                    Enviar
                 </Button>
             </form>
         </Body>
