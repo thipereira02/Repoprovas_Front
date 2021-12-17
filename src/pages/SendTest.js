@@ -134,17 +134,6 @@ const Button = styled.button`
   align-items: center;
 `;
 
-const Error = styled.div`
-  margin: 10px 0;
-  color: #DC3545;
-  background-color: #FFF;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-`;
-
 const Select = styled.select`
   height: 43px;
   background: #FFF;
