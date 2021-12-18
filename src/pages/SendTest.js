@@ -24,6 +24,8 @@ export default function SendTest() {
     }, []);
 
     useEffect(() => {
+        setTeachers(null);
+
         if (subject !== null){
             const teacherReq = getTeacherBySubject(subject);
             teacherReq.then(res => setTeachers(res.data));
@@ -84,12 +86,14 @@ export default function SendTest() {
                         <option value={s.id} key={s.id}>{s.name}</option>
                     ))}
                 </Select>
-                <Select onChange={(e) => setTeacher(e.target.value)} >
-                    <option value="0" disabled selected>Professor</option>
-                    {teachers.map(t => (
-                        <option value={t.id} key={t.id}>{t.name}</option>
-                    ))}
-                </Select>
+                {teachers && 
+                    <Select onChange={(e) => setTeacher(e.target.value)}>
+                        <option value="0" disabled selected>Professor</option>
+                        {teachers.map(t => (
+                            <option value={t.id} key={t.id}>{t.name}</option>
+                        ))}
+                    </Select>
+                }
                 <Button type="submit">
                     Enviar
                 </Button>
