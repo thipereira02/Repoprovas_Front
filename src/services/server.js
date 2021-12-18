@@ -17,3 +17,7 @@ export function getTeacherBySubject(id){
 export function sendTest(body){
     return axios.post(`${BASE_URL}/tests`, body);
 }
+
+export function getTeachersList(){
+    return axios.get(`${BASE_URL}/teachers`);
+}
