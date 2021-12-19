@@ -21,3 +21,7 @@ export function sendTest(body){
 export function getTeachersList(){
     return axios.get(`${BASE_URL}/tests/teachers`);
 }
+
+export function getSubjectsList(){
+    return axios.get(`${BASE_URL}/tests/subjects`);
+}

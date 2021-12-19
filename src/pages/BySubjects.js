@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getSubjectsList } from '../services/server';
 
-import { getTeachersList } from '../services/server';
-
-export default function ByTeachers() {
+export default function BySubjects() {
     const [list, setList] = useState([]);
+    const [disciplines, setDisciplines] = useState([]);
     const [tests, setTests] = useState([]);
 
     useEffect(() => {
-        const req = getTeachersList();
+        const req = getSubjectsList();
         req.then(res => setList(res.data));
     },[]);
 
     return (
         <Body>
             <Column>
-                <Title>Professores</Title>
+                <Title>Períodos</Title>
                 {list.map(l => (
-                    <>
-                        <h2 key={l.id} onClick={() => setTests(l.tests)} >
-                            {l.name} ({l.tests.length} {l.tests.length === 1 ? 'prova' : 'provas'})
-                        </h2>
-                    </>
+                    <h2 key={l.id} onClick={() => setDisciplines(l.subjects)}>
+                        {l.name}
+                    </h2>
+                ))}
+            </Column>
+            <Column>
+                {(disciplines.length !== 0) && 
+                    <Title>Disciplinas</Title>
+                }
+                {disciplines.map(d => (
+                    <h3 key={d.id} onClick={() => setTests(d.tests)}>
+                        {d.name} ({d.tests.length} {d.tests.length === 1 ? 'prova' : 'provas'})
+                    </h3>
                 ))}
             </Column>
             <Column>
                 {(tests.length !== 0) && 
                     <Title>Provas</Title>
                 }
-                {tests && tests.map(t => (
+                {tests.map(t => (
                     <a href={t.pdfLink} target="_blank" rel="noreferrer" key={t.id}>
-                        {t.category.name} - {t.name} - {t.subject.name}
+                        {t.category.name} - {t.name} - {t.teacher.name}
                     </a>
                 ))}
             </Column>
@@ -39,17 +47,29 @@ export default function ByTeachers() {
 }
 
 const Body = styled.div`
-    margin: 50px 150px;
+    margin: 50px 100px;
     display: flex;
 `;
 
 const Column = styled.div`
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: calc(100% / 3);
 
     h2{
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 30px;
+        background-image: linear-gradient(to bottom, #757575, #000);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    h3{
         font-size: 20px;
         font-weight: 700;
         line-height: 30px;
@@ -58,6 +78,7 @@ const Column = styled.div`
         -webkit-background-clip: text;
         color: transparent;
         cursor: pointer;
+        text-align: center;
     }
 
     a{

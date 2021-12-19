@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
-import image from '../assets/REPOPROVAS.png';
+import image from '../assets/logo.png';
 
 export default function Main({ children }) {
     const navigate = useNavigate();
