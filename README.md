@@ -2,7 +2,7 @@
 
 In Repoprovas people can share the evidence they have anonymously.
 
-<img src="" />
+<img src="./public/assets/repoprovas.gif" />
 
 Try it out now at http://repoprovas-front-one.vercel.app
 
