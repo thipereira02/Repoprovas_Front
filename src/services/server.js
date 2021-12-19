@@ -19,5 +19,5 @@ export function sendTest(body){
 }
 
 export function getTeachersList(){
-    return axios.get(`${BASE_URL}/teachers`);
+    return axios.get(`${BASE_URL}/tests/teachers`);
 }
