@@ -67,7 +67,7 @@ export default function SendTest() {
                 />
                 <Input
                     type="url" 
-                    placeholder="Link" 
+                    placeholder="Link do PDF" 
                     value={link} 
                     onChange={e => setLink(e.target.value)}
                     onInvalid={e => e.target.setCustomValidity('Você deve inserir um link válido aqui')} 
@@ -115,6 +115,7 @@ const Input = styled.input`
   width: 100%;
   height: 43px;
   font-size: 20px;
+  background: #FFF;
 
   ::placeholder{
       font-size: 20px;
