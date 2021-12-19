@@ -1,6 +1,6 @@
 # Repoprovas
 
-In Repoprovas people can share the evidence they have anonymously.
+In Repoprovas people can share the tests they have anonymously.
 
 <img src="./public/assets/repoprovas.gif" />
 
