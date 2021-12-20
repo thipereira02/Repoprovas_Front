@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = 'https://back-repoprovasapp.herokuapp.com';
 
 export function getCategories(){
     return axios.get(`${BASE_URL}/categories`);
